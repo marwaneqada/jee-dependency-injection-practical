@@ -121,3 +121,28 @@ Expected output for both presentations:
 
 Version DAO avec mini framework
 RES = 430.0
+
+### XmlApplicationContext
+
+`XmlApplicationContext` est la version XML du mini framework IoC.
+
+Le fichier `mini-framework-config.xml` permet de déclarer les beans et le type d’injection à utiliser.
+
+Types d’injection supportés :
+- injection par constructeur
+- injection par setter
+- injection par attribut
+
+Fichiers ajoutés :
+- `BeanDefinition`
+- `BeansConfiguration`
+- `XmlApplicationContext`
+- `mini-framework-config.xml`
+- `PresentationMiniFrameworkXmlConstructor`
+- `PresentationMiniFrameworkXmlSetter`
+- `PresentationMiniFrameworkXmlField`
+
+Expected output for the XML demos:
+
+Version DAO avec mini framework
+RES = 430.0

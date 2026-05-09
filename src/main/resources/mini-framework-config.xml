@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans>
+    <bean id="daoXml" class="demo.DaoDemo"/>
+
+    <bean id="metierXmlConstructor" class="demo.MetierConstructorDemo" injection="constructor">
+        <dependency>daoXml</dependency>
+    </bean>
+
+    <bean id="metierXmlSetter" class="demo.MetierSetterDemo" injection="setter">
+        <dependency>daoXml</dependency>
+    </bean>
+
+    <bean id="metierXmlField" class="demo.MetierDemo" injection="field">
+        <dependency>daoXml</dependency>
+    </bean>
+</beans>
