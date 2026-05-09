@@ -35,6 +35,16 @@ Fichiers ajoutés :
 - `config.txt`
 - `PresentationDynamique`
 
+### Injection avec Spring - Version XML
+
+Dans cette version, Spring crée les objets et injecte les dépendances à partir du fichier `spring-config.xml`.
+
+Fichiers ajoutés :
+- `spring-config.xml`
+- `PresentationSpringXML`
+
+La dépendance entre `MetierImpl` et `DaoImpl` est configurée dans le fichier XML avec la balise `<property>`.
+
 ### Injection avec Spring - Version annotations
 
 Dans cette version, Spring détecte automatiquement les classes annotées avec `@Component`.
@@ -47,3 +57,41 @@ Classes modifiées :
 
 Classe ajoutée :
 - `PresentationSpringAnnotations`
+
+## Partie 2 - Mini Framework IoC
+
+L’objectif de cette partie est de développer un mini framework d’injection des dépendances similaire à Spring IoC.
+
+### Structure initiale du framework
+
+Packages créés :
+- `framework.annotations`
+- `framework.context`
+
+Annotations créées :
+- `@Component`
+- `@Autowired`
+
+Interface créée :
+- `ApplicationContext`
+
+### AnnotationApplicationContext
+
+`AnnotationApplicationContext` est la première implémentation du mini conteneur IoC.
+
+Il reçoit une liste de classes, crée les objets annotés avec `@Component`, les stocke comme beans, puis injecte les dépendances dans les champs annotés avec `@Autowired`.
+
+La récupération des objets se fait avec :
+- `getBean(String name)`
+- `getBean(Class<T> type)`
+
+### Test du mini framework avec annotations
+
+Un package `demo` a été ajouté pour tester le mini conteneur IoC.
+
+Classes ajoutées :
+- `DaoDemo`
+- `MetierDemo`
+- `PresentationMiniFrameworkAnnotations`
+
+Dans ce test, le conteneur crée les objets annotés avec `@Component` et injecte automatiquement la dépendance `IDao` dans `MetierDemo` grâce à `@Autowired`.
