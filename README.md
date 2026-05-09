@@ -34,3 +34,16 @@ Le programme lit ce fichier, charge les classes avec `Class.forName`, crée les 
 Fichiers ajoutés :
 - `config.txt`
 - `PresentationDynamique`
+
+### Injection avec Spring - Version annotations
+
+Dans cette version, Spring détecte automatiquement les classes annotées avec `@Component`.
+
+L’injection de dépendance est réalisée avec l’annotation `@Autowired`.
+
+Classes modifiées :
+- `DaoImpl`
+- `MetierImpl`
+
+Classe ajoutée :
+- `PresentationSpringAnnotations`
