@@ -24,3 +24,13 @@ Classes créées :
 - `PresentationStatique`
 
 Cette version montre le principe du couplage faible entre la couche métier et la couche DAO, car `MetierImpl` dépend de l’interface `IDao` et non d’une implémentation concrète.
+
+### Injection par instanciation dynamique
+
+Dans cette version, les noms des classes sont placés dans le fichier `config.txt`.
+
+Le programme lit ce fichier, charge les classes avec `Class.forName`, crée les objets avec `newInstance`, puis injecte la dépendance avec la méthode `setDao`.
+
+Fichiers ajoutés :
+- `config.txt`
+- `PresentationDynamique`
