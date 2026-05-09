@@ -81,6 +81,11 @@ Interface créée :
 
 Il reçoit une liste de classes, crée les objets annotés avec `@Component`, les stocke comme beans, puis injecte les dépendances dans les champs annotés avec `@Autowired`.
 
+Le conteneur supporte maintenant :
+- l'injection par attribut
+- l'injection par constructeur
+- l'injection par setter ou méthode
+
 La récupération des objets se fait avec :
 - `getBean(String name)`
 - `getBean(Class<T> type)`
