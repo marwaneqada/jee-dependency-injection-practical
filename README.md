@@ -100,3 +100,24 @@ Classes ajoutées :
 - `PresentationMiniFrameworkAnnotations`
 
 Dans ce test, le conteneur crée les objets annotés avec `@Component` et injecte automatiquement la dépendance `IDao` dans `MetierDemo` grâce à `@Autowired`.
+
+### Test des injections par constructeur et setter
+
+Deux nouvelles classes ont été ajoutées pour tester les autres types d’injection supportés par le mini framework.
+
+Classes ajoutées :
+- `MetierConstructorDemo`
+- `MetierSetterDemo`
+- `PresentationMiniFrameworkConstructor`
+- `PresentationMiniFrameworkSetter`
+
+`MetierConstructorDemo` utilise l’injection via constructeur avec `@Autowired`.
+
+`MetierSetterDemo` utilise l’injection via setter avec `@Autowired`.
+
+Les deux exemples utilisent le même bean `DaoDemo`.
+
+Expected output for both presentations:
+
+Version DAO avec mini framework
+RES = 430.0
