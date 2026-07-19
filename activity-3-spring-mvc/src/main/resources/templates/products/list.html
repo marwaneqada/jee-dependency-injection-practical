@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<head th:replace="~{fragments/layout :: head('Products')}"></head>
+<body>
+<header th:replace="~{fragments/layout :: navigation}"></header>
+
+<main class="page-shell">
+    <section class="page-heading">
+        <div>
+            <p class="eyebrow">Inventory</p>
+            <h1>Products</h1>
+            <p>Search the catalogue, review stock, and keep product records current.</p>
+        </div>
+        <a sec:authorize="hasRole('ADMIN')" class="button primary" th:href="@{/products/new}">Add product</a>
+    </section>
+
+    <div class="notice" th:if="${message}" th:text="${message}"></div>
+
+    <form class="search-panel" th:action="@{/products}" method="get">
+        <label for="keyword">Search by product name</label>
+        <div class="search-row">
+            <input id="keyword" name="keyword" type="search" th:value="${keyword}"
+                   placeholder="Try ‘keyboard’">
+            <button class="button primary" type="submit">Search</button>
+            <a class="button secondary" th:href="@{/products}">Clear</a>
+        </div>
+    </form>
+
+    <section class="table-card" aria-label="Product results">
+        <div class="empty-state" th:if="${productPage.empty}">
+            <h2>No products found</h2>
+            <p>Change the search term and try again.</p>
+        </div>
+
+        <div class="table-scroll" th:unless="${productPage.empty}">
+            <table>
+                <thead>
+                <tr>
+                    <th>Name</th>
+                    <th>Price</th>
+                    <th>Stock</th>
+                    <th sec:authorize="hasRole('ADMIN')">Actions</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr th:each="product : ${productPage.content}">
+                    <td class="product-name" th:text="${product.name}">Product</td>
+                    <td th:text="${#numbers.formatDecimal(product.price, 1, 2)} + ' MAD'">0.00 MAD</td>
+                    <td>
+                        <span class="stock-badge"
+                              th:classappend="${product.quantity < 5} ? ' low-stock' : ''"
+                              th:text="${product.quantity}">0</span>
+                    </td>
+                    <td class="row-actions" sec:authorize="hasRole('ADMIN')">
+                        <a class="text-link" th:href="@{/products/{id}/edit(id=${product.id})}">Edit</a>
+                        <form th:action="@{/products/{id}/delete(id=${product.id})}" method="post">
+                            <input type="hidden" name="keyword" th:value="${keyword}">
+                            <input type="hidden" name="page" th:value="${productPage.number}">
+                            <button class="text-link danger" type="submit"
+                                    onclick="return confirm('Delete this product?')">Delete</button>
+                        </form>
+                    </td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+    </section>
+
+    <nav class="pagination" th:if="${productPage.totalPages > 1}" aria-label="Product pages">
+        <a th:if="${productPage.hasPrevious()}"
+           th:href="@{/products(page=${productPage.number - 1}, keyword=${keyword})}">Previous</a>
+        <span th:each="pageNumber : ${#numbers.sequence(0, productPage.totalPages - 1)}">
+            <a th:href="@{/products(page=${pageNumber}, keyword=${keyword})}"
+               th:classappend="${pageNumber == productPage.number} ? ' active' : ''"
+               th:text="${pageNumber + 1}">1</a>
+        </span>
+        <a th:if="${productPage.hasNext()}"
+           th:href="@{/products(page=${productPage.number + 1}, keyword=${keyword})}">Next</a>
+    </nav>
+</main>
+
+<footer th:replace="~{fragments/layout :: footer}"></footer>
+</body>
+</html>

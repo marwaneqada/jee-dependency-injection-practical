@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head th:replace="~{fragments/layout :: head(${product.id == null ? 'Add product' : 'Edit product'})}"></head>
+<body>
+<header th:replace="~{fragments/layout :: navigation}"></header>
+
+<main class="page-shell narrow">
+    <section class="page-heading">
+        <div>
+            <p class="eyebrow">Inventory editor</p>
+            <h1 th:text="${product.id == null ? 'Add product' : 'Edit product'}">Product form</h1>
+            <p>Enter a clear name, the selling price, and the available quantity.</p>
+        </div>
+    </section>
+
+    <form class="form-card" th:action="@{/products}" th:object="${product}" method="post">
+        <input type="hidden" th:field="*{id}">
+
+        <div class="field">
+            <label for="name">Product name</label>
+            <input id="name" type="text" th:field="*{name}"
+                   th:classappend="${#fields.hasErrors('name')} ? ' invalid' : ''">
+            <p class="field-error" th:if="${#fields.hasErrors('name')}" th:errors="*{name}"></p>
+        </div>
+
+        <div class="field-grid">
+            <div class="field">
+                <label for="price">Price (MAD)</label>
+                <input id="price" type="number" step="0.01" min="0.01" th:field="*{price}"
+                       th:classappend="${#fields.hasErrors('price')} ? ' invalid' : ''">
+                <p class="field-error" th:if="${#fields.hasErrors('price')}" th:errors="*{price}"></p>
+            </div>
+            <div class="field">
+                <label for="quantity">Quantity</label>
+                <input id="quantity" type="number" min="0" th:field="*{quantity}"
+                       th:classappend="${#fields.hasErrors('quantity')} ? ' invalid' : ''">
+                <p class="field-error" th:if="${#fields.hasErrors('quantity')}" th:errors="*{quantity}"></p>
+            </div>
+        </div>
+
+        <div class="form-actions">
+            <button class="button primary" type="submit">Save product</button>
+            <a class="button secondary" th:href="@{/products}">Cancel</a>
+        </div>
+    </form>
+</main>
+
+<footer th:replace="~{fragments/layout :: footer}"></footer>
+</body>
+</html>

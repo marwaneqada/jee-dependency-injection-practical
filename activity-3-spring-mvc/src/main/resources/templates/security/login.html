@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head th:replace="~{fragments/layout :: head('Sign in')}"></head>
+<body class="auth-page">
+<main class="auth-shell">
+    <section class="auth-intro">
+        <span class="brand-mark large">S</span>
+        <p class="eyebrow">Product operations</p>
+        <h1>Know what is in stock.</h1>
+        <p>A focused inventory workspace built with Spring MVC, Thymeleaf, JPA, and Spring Security.</p>
+    </section>
+
+    <section class="login-card">
+        <div>
+            <p class="eyebrow">Welcome back</p>
+            <h2>Sign in to Stockroom</h2>
+        </div>
+
+        <div class="notice error" th:if="${param.error}">The username or password is incorrect.</div>
+        <div class="notice" th:if="${param.logout}">You have signed out successfully.</div>
+
+        <form th:action="@{/login}" method="post">
+            <div class="field">
+                <label for="username">Username</label>
+                <input id="username" name="username" type="text" autocomplete="username" required autofocus>
+            </div>
+            <div class="field">
+                <label for="password">Password</label>
+                <input id="password" name="password" type="password" autocomplete="current-password" required>
+            </div>
+            <button class="button primary full-width" type="submit">Sign in</button>
+        </form>
+
+        <div class="demo-accounts">
+            <strong>Demo accounts</strong>
+            <span>Admin: <code>admin / admin123</code></span>
+            <span>Viewer: <code>viewer / viewer123</code></span>
+        </div>
+    </section>
+</main>
+</body>
+</html>

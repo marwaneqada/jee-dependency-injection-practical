@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head th:replace="~{fragments/layout :: head('Access denied')}"></head>
+<body>
+<header th:replace="~{fragments/layout :: navigation}"></header>
+<main class="page-shell narrow">
+    <section class="status-card">
+        <span class="status-code">403</span>
+        <p class="eyebrow">Access denied</p>
+        <h1>This action requires administrator access.</h1>
+        <p>Your account can still browse and search the product catalogue.</p>
+        <a class="button primary" th:href="@{/products}">Return to products</a>
+    </section>
+</main>
+<footer th:replace="~{fragments/layout :: footer}"></footer>
+</body>
+</html>
