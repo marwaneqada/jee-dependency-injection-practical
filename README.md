@@ -6,3 +6,4 @@ This repository groups the practical activities for the JEE course. Each activit
 - [Activity 2 - ORM with JPA, Hibernate, and Spring Data](activity-2-orm/)
 - [Activity 3 - Secured Spring MVC Web Application](activity-3-spring-mvc/)
 - [Activity 4 - Angular and Spring Boot](activity-4-angular-spring/)
+- [Activity 5 - Spring, Angular, JWT, and Spring Security](activity-5-angular-jwt-security/)
