@@ -1,4 +1,12 @@
-.idea/
-*.iml
 target/
-out/
+**/target/
+.idea/
+**/.idea/
+.vscode/
+**/.vscode/
+*.iml
+*.log
+*.mv.db
+*.trace.db
+.DS_Store
+.tools/
