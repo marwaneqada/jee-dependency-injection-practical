@@ -1,0 +1,56 @@
+<main class="products-shell">
+  <section class="page-heading">
+    <div>
+      <p class="eyebrow">Live catalogue</p>
+      <h1>Products</h1>
+      <p>{{ products().length }} records · {{ selectedCount() }} selected</p>
+    </div>
+    <button class="refresh-button" type="button" (click)="loadProducts()" [disabled]="loading()">
+      Refresh
+    </button>
+  </section>
+
+  @if (error()) {
+    <div class="error-banner" role="alert">{{ error() }}</div>
+  }
+
+  @if (loading()) {
+    <section class="state-panel" aria-live="polite">
+      <span class="loader"></span>
+      <p>Loading products…</p>
+    </section>
+  } @else if (products().length === 0) {
+    <section class="state-panel">
+      <p class="state-label">No products</p>
+      <h2>The catalogue is empty.</h2>
+      <p>Restart the backend to restore the sample dataset.</p>
+    </section>
+  } @else {
+    <section class="product-list" aria-label="Product catalogue">
+      <div class="list-header" aria-hidden="true">
+        <span>Product</span><span>Price</span><span>Selected</span><span>Action</span>
+      </div>
+
+      @for (product of products(); track product.id) {
+        <article class="product-row" [class.selected]="product.selected">
+          <div class="product-info">
+            <span class="product-index">{{ product.id.toString().padStart(2, '0') }}</span>
+            <div>
+              <h2>{{ product.name }}</h2>
+              <span>{{ product.selected ? 'Priority item' : 'Standard item' }}</span>
+            </div>
+          </div>
+          <strong class="price">{{ product.price | number:'1.2-2' }} <small>MAD</small></strong>
+          <label class="selection-control">
+            <input type="checkbox" [checked]="product.selected"
+                   [disabled]="isPending(product.id)"
+                   (change)="toggleSelected(product)">
+            <span>{{ product.selected ? 'Selected' : 'Select' }}</span>
+          </label>
+          <button class="delete-button" type="button" [disabled]="isPending(product.id)"
+                  (click)="deleteProduct(product)">Delete</button>
+        </article>
+      }
+    </section>
+  }
+</main>

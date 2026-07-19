@@ -1,0 +1,17 @@
+<header class="site-header">
+  <a class="brand" routerLink="/" aria-label="Product Desk home">
+    <span class="brand-mark">PD</span>
+    <span>Product Desk</span>
+  </a>
+  <nav aria-label="Primary navigation">
+    <a routerLink="/" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }">Home</a>
+    <a routerLink="/products" routerLinkActive="active">Products</a>
+  </nav>
+</header>
+
+<router-outlet />
+
+<footer class="site-footer">
+  <span>Activity 4</span>
+  <span>Angular · Spring Boot · H2</span>
+</footer>
